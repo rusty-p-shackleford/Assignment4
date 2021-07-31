@@ -219,9 +219,9 @@ void interact(){
 			customerNumber = atoi(userInputArr[1]);
 		}
 
-		if( (strcmp(command, "*") == 0) || (strcmp(command, "Run") == 0) ){
+		if( (strcmp(command, "Status") == 0) || (strcmp(command, "Run") == 0) ){
 		
-			if(strcmp(command, "*") == 0){
+			if(strcmp(command, "Status") == 0){
 				printAllResources();
 			}else{
 
@@ -262,20 +262,21 @@ void interact(){
 
 			}else{
 			
-				printf("Error: Command Not Recognized. Please try again or enter \"EXIT\" to quit the program.\n");
+				printf("Error: Command Not Recognized. Please try again or enter \"Exit\" to quit the program.\n");
 			}
 	
-		}else if(strcmp(command, "EXIT") != 0){
+		}else if(strcmp(command, "Exit") != 0){
 
-			printf("ERROR: The Command as Entered is Invalid. Please try again or enter \"EXIT\" to quit the program.\n");
+			printf("ERROR: The Command as Entered is Invalid. Please try again or enter \"Exit\" to quit the program.\n");
 		}
 
-	}while(strcmp(userInputArr[0], "EXIT") != 0);
+	}while(strcmp(userInputArr[0], "Exit") != 0);
 
 	free(resourceArr);
 	//Must free as getline allocates memory to a buffer that must be freed
 	free(cmdLineInput);
 }
+
 int NotFindSafeSequence(int printSafeSeq){
 
 	int work[NUM_RESOURCES];
@@ -361,7 +362,7 @@ int NotFindSafeSequence(int printSafeSeq){
 	if(printSafeSeq){
 	
 		//Print safeSeq here, along with printCustomerInfo
-		printf("<");
+		printf("Safe Sequence: <");
 		for(int i = 0; i < NUM_CUSTOMERS; i++){
 
 			printf("%d", safeSeq[i]);
@@ -472,11 +473,8 @@ void printMaximumArr(int printHeader){
 	}	
 	for(int i = 0; i < NUM_CUSTOMERS; i++){
 		for(int j = 0; j < NUM_RESOURCES; j++){
-			printf("%d", banker.maximum[i][j]);
-
-			if(j != NUM_RESOURCES-1){
-				printf(",");
-			}	
+			printf("%d ", banker.maximum[i][j]);
+	
 		}	
 		printf("\n");	
 	}
@@ -490,11 +488,8 @@ void printAllocatedArr(int printHeader){
 	}
 	for(int i = 0; i < NUM_CUSTOMERS; i++){
 		for(int j = 0; j < NUM_RESOURCES; j++){
-			printf("%d", banker.allocated[i][j]);	
+			printf("%d ", banker.allocated[i][j]);	
 
-			if(j != NUM_RESOURCES-1){
-				printf(", ");
-			}
 		}	
 		printf("\n");	
 	}
@@ -508,11 +503,8 @@ void printNeededArr(int printHeader){
 	}
 	for(int i = 0; i < NUM_CUSTOMERS; i++){
 		for(int j = 0; j < NUM_RESOURCES; j++){
-			printf("%d", banker.needed[i][j]);
+			printf("%d ", banker.needed[i][j]);
 
-			if(j != NUM_RESOURCES-1){
-				printf(", ");
-			}
 		}	
 		printf("\n");	
 	}
@@ -553,5 +545,5 @@ void printCustomerInfo(int customerNumber, int work[NUM_RESOURCES]){
 
 		printf("%d ", work[i]);
 	}
-	printf("\n\n");
+	printf("\n");
 }
